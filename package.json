@@ -1,0 +1,58 @@
+{
+  "name": "anime_graph",
+  "version": "1.0.0",
+  "main": "js/index.js",
+  "repository": "git@github.com:iidzuka/anime_graph.git",
+  "author": "iidzuka <taki.hiyoshi@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "gulp",
+    "test": "gulp test"
+  },
+  "babel": {
+    "presets": [
+      "latest",
+      "flow"
+    ]
+  },
+  "eslintConfig": {
+    "extends": [
+      "airbnb",
+      "plugin:flowtype/recommended"
+    ],
+    "parser": "babel-eslint",
+    "plugins": [
+      "import",
+      "flowtype"
+    ],
+    "env": {
+      "browser": true
+    }
+  },
+  "dependencies": {
+    "babel-polyfill": "^6.16.0"
+  },
+  "devDependencies": {
+    "babel-eslint": "^7.1.1",
+    "babel-loader": "^6.2.8",
+    "babel-preset-flow": "^1.0.0",
+    "babel-preset-latest": "^6.16.0",
+    "chai": "^3.5.0",
+    "del": "^2.2.2",
+    "eslint": "^3.10.2",
+    "eslint-config-airbnb": "^13.0.0",
+    "eslint-plugin-flowtype": "^2.29.1",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "2.2.3",
+    "eslint-plugin-react": "^6.7.1",
+    "gulp": "^3.9.1",
+    "gulp-babel": "^6.1.2",
+    "gulp-eslint": "^3.0.1",
+    "gulp-flowtype": "^1.0.0",
+    "gulp-mocha": "^3.0.1",
+    "mocha": "^3.2.0",
+    "sinon": "^1.17.6",
+    "sinon-chai": "^2.8.0",
+    "webpack-stream": "^3.2.0"
+  }
+}
