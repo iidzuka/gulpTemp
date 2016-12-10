@@ -4,6 +4,10 @@ import eslint from 'gulp-eslint';
 import webpack from 'webpack-stream';
 import mocha from 'gulp-mocha';
 import flow from 'gulp-flowtype';
+import sass from 'gulp-sass';
+import postcss from 'gulp-postcss';
+import cssnext from 'postcss-cssnext';
+
 import webpackConfig from './webpack.config.babel';
 
 const gulp = require('gulp');
@@ -20,6 +24,8 @@ const paths = {
   gulpFile: 'gulpfile.babel.js',
   webpackFile: 'webpack.config.babel.js',
   clientBundle: 'dist/client-bundle.js?(.map)',
+  sass: 'src/sass/**/*.sass',
+  css: 'dist/css/',
   libDir: 'lib',
   distDir: 'dist',
 };
@@ -29,7 +35,7 @@ gulp.task('clean', () => del([
   paths.clientBundle,
 ]));
 
-gulp.task('build', ['lint', 'clean'], () =>
+gulp.task('build', ['lint', 'clean', 'sass'], () =>
   gulp.src(paths.allSrcJs)
     .pipe(babel())
     .pipe(gulp.dest(paths.libDir)),
@@ -39,6 +45,16 @@ gulp.task('main', ['test'], () => {
   gulp.src(paths.clientEntryPoint)
     .pipe(webpack(webpackConfig))
     .pipe(gulp.dest(paths.distDir));
+});
+
+gulp.task('sass', () => {
+  const processors = [
+    cssnext(),
+  ];
+  gulp.src(paths.sass)
+    .pipe(sass())
+    .pipe(postcss(processors))
+    .pipe(gulp.dest(paths.css));
 });
 
 gulp.task('watch', () => {

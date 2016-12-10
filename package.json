@@ -50,7 +50,10 @@
     "gulp-eslint": "^3.0.1",
     "gulp-flowtype": "^1.0.0",
     "gulp-mocha": "^3.0.1",
+    "gulp-postcss": "^6.2.0",
+    "gulp-sass": "^2.3.2",
     "mocha": "^3.2.0",
+    "postcss-cssnext": "^2.9.0",
     "sinon": "^1.17.6",
     "sinon-chai": "^2.8.0",
     "webpack-stream": "^3.2.0"
