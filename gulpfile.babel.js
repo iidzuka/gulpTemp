@@ -31,6 +31,12 @@ const paths = {
   libDir: 'lib',
   js: 'dist/js',
 };
+const plumberOption = {
+  errorHandler(error) {
+    console.log(error.message);
+    this.emit('end');
+  },
+}
 
 gulp.task('clean', () => del([
   paths.libDir,
@@ -39,7 +45,7 @@ gulp.task('clean', () => del([
 
 gulp.task('build', ['lint', 'clean', 'pug', 'sass'], () =>
   gulp.src(paths.allSrcJs)
-    .pipe(plumber())
+    .pipe(plumber(plumberOption))
     .pipe(babel())
     .pipe(gulp.dest(paths.libDir)),
 );
@@ -52,7 +58,7 @@ gulp.task('main', ['test'], () =>
 
 gulp.task('pug', () =>
   gulp.src(paths.pug)
-    .pipe(plumber())
+    .pipe(plumber(plumberOption))
     .pipe(pug({ pretty: true }))
     .pipe(gulp.dest(paths.html)),
 );
@@ -62,7 +68,7 @@ gulp.task('sass', () => {
     cssnext(),
   ];
   gulp.src(paths.sass)
-    .pipe(plumber())
+    .pipe(plumber(plumberOption))
     .pipe(sass())
     .pipe(postcss(processors))
     .pipe(gulp.dest(paths.css));
@@ -85,7 +91,7 @@ gulp.task('lint', () =>
     paths.gulpFile,
     paths.webpackFile,
   ])
-    .pipe(plumber())
+    .pipe(plumber(plumberOption))
     .pipe(eslint())
     .pipe(eslint.format())
     .pipe(eslint.failAfterError())
