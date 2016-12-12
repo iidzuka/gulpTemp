@@ -69,6 +69,8 @@ gulp.task('sass', () => {
 
 gulp.task('watch', () => {
   gulp.watch(paths.allSrcJs, ['main']);
+  gulp.watch(paths.sass, ['sass']);
+  gulp.watch(paths.pug, ['pug']);
 });
 
 gulp.task('default', ['watch', 'main']);
