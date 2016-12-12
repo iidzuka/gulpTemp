@@ -11,6 +11,7 @@ import sass from 'gulp-sass';
 import postcss from 'gulp-postcss';
 import cssnext from 'postcss-cssnext';
 import pug from 'gulp-pug';
+import plumber from 'gulp-plumber';
 
 import webpackConfig from './webpack.config.babel';
 
@@ -38,6 +39,7 @@ gulp.task('clean', () => del([
 
 gulp.task('build', ['lint', 'clean', 'pug', 'sass'], () =>
   gulp.src(paths.allSrcJs)
+    .pipe(plumber())
     .pipe(babel())
     .pipe(gulp.dest(paths.libDir)),
 );
@@ -50,9 +52,7 @@ gulp.task('main', ['test'], () =>
 
 gulp.task('pug', () =>
   gulp.src(paths.pug)
-/*    .pipe(plumber({
-      errorhandler: notify.onError('Error: <%= error.message%>')
-    }))*/
+    .pipe(plumber())
     .pipe(pug({ pretty: true }))
     .pipe(gulp.dest(paths.html)),
 );
@@ -62,15 +62,19 @@ gulp.task('sass', () => {
     cssnext(),
   ];
   gulp.src(paths.sass)
+    .pipe(plumber())
     .pipe(sass())
     .pipe(postcss(processors))
     .pipe(gulp.dest(paths.css));
 });
 
 gulp.task('watch', () => {
-  gulp.watch(paths.allSrcJs, ['main']);
-  gulp.watch(paths.sass, ['sass']);
-  gulp.watch(paths.pug, ['pug']);
+  const watchList = [
+    paths.allSrcJs,
+    paths.sass,
+    paths.pug,
+  ];
+  gulp.watch(watchList, ['main']);
 });
 
 gulp.task('default', ['watch', 'main']);
@@ -81,6 +85,7 @@ gulp.task('lint', () =>
     paths.gulpFile,
     paths.webpackFile,
   ])
+    .pipe(plumber())
     .pipe(eslint())
     .pipe(eslint.format())
     .pipe(eslint.failAfterError())
