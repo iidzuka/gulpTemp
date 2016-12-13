@@ -12,6 +12,7 @@ import postcss from 'gulp-postcss';
 import cssnext from 'postcss-cssnext';
 import pug from 'gulp-pug';
 import plumber from 'gulp-plumber';
+import browserSync from 'browser-sync';
 
 import webpackConfig from './webpack.config.babel';
 
@@ -31,12 +32,13 @@ const paths = {
   libDir: 'lib',
   js: 'dist/js',
 };
+
 const plumberOption = {
   errorHandler(error) {
     console.log(error.message);
     this.emit('end');
   },
-}
+};
 
 gulp.task('clean', () => del([
   paths.libDir,
@@ -80,10 +82,25 @@ gulp.task('watch', () => {
     paths.sass,
     paths.pug,
   ];
-  gulp.watch(watchList, ['main']);
+  gulp.watch(watchList, ['main', 'reload']);
 });
 
 gulp.task('default', ['watch', 'main']);
+
+gulp.task('server', ['default'], () => {
+  const serverSetting = {
+    server: {
+      baseDir: './dist/',
+      index: 'index.html',
+    },
+  };
+  browserSync(serverSetting);
+});
+
+gulp.task('reload', () =>
+  browserSync.reload(),
+);
+
 
 gulp.task('lint', () =>
   gulp.src([
