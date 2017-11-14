@@ -12,7 +12,7 @@
   },
   "babel": {
     "presets": [
-      "latest",
+      "env",
       "flow"
     ]
   },
@@ -31,16 +31,20 @@
     }
   },
   "dependencies": {
+    "babel-core": "^6.26.0",
     "babel-polyfill": "^6.16.0",
+    "babel-preset-env": "^1.6.1",
     "browser-sync": "^2.18.5",
+    "caniuse-db": "^1.0.30000764",
+    "gulp": "^3.9.1",
     "gulp-notify": "^2.2.0",
-    "gulp-plumber": "^1.1.0"
+    "gulp-plumber": "^1.1.0",
+    "webpack": "^3.8.1"
   },
   "devDependencies": {
     "babel-eslint": "^7.1.1",
     "babel-loader": "^6.2.8",
     "babel-preset-flow": "^1.0.0",
-    "babel-preset-latest": "^6.16.0",
     "chai": "^3.5.0",
     "del": "^2.2.2",
     "eslint": "^3.10.2",
@@ -49,7 +53,6 @@
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "2.2.3",
     "eslint-plugin-react": "^6.7.1",
-    "gulp": "^3.9.1",
     "gulp-babel": "^6.1.2",
     "gulp-eslint": "^3.0.1",
     "gulp-flowtype": "^1.0.0",

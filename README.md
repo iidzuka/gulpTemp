@@ -5,7 +5,7 @@
 - nvm（Node.jsのバージョン管理システム)
 https://github.com/creationix/nvm
 ```
-curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.32.1/install.sh | bash
+curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.6/install.sh | bash
 nvm install v7.1.0
 ```
 - yarn
